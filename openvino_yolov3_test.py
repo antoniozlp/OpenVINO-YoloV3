@@ -147,8 +147,10 @@ def main_IE_infer():
     elapsedTime = 0
 
     args = build_argparser().parse_args()
-    model_xml = "lrmodels/YoloV3/FP32/frozen_yolo_v3.xml" #<--- CPU
-    #model_xml = "lrmodels/YoloV3/FP16/frozen_yolo_v3.xml" #<--- MYRIAD
+    if "CPU" in args.device:
+        model_xml = "/home/tno/yolo/yolo_V3/openVino/yolov3_IR.xml" #<--- CPU
+    if "MYRIAD" in args.device:
+        model_xml = "/home/tno/yolo/yolo_V3/openVino/yolov3_IR_FP16.xml" #<--- MYRIAD
     model_bin = os.path.splitext(model_xml)[0] + ".bin"
 
     cap = cv2.VideoCapture(0)
